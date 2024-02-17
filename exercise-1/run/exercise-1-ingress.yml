@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: exercise-1-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: "my-app.com"
+      http:
+        paths:
+          - path: /backend
+            pathType: Prefix
+            backend:
+              service:
+                name: exercise-1-backend
+                port:
+                  number: 8080
+          - path: /frontend
+            pathType: Prefix
+            backend:
+              service:
+                name: exercise-1-frontend
+                port:
+                  number: 80
