@@ -34,5 +34,5 @@ jobs:
       - name: Push Docker image
         run: |
           export tag_with_timestamp="${{ vars.DOCKERHUB_USERNAME }}/$docker_image_name:$docker_image_tag-$(date +%s)"
-          docker tag "$docker_image_nam:$docker_image_tag" "$tag_with_timestamp"
+          docker tag "$docker_image_name:$docker_image_tag" "$tag_with_timestamp"
           docker push "$tag_with_timestamp"
