@@ -33,6 +33,6 @@ jobs:
 
       - name: Push Docker image
         run: |
-          echo tag_with_timestamp="${{ vars.DOCKERHUB_USERNAME }}/$docker_image_name:$docker_image_tag-$(date +%s)" >> $GITHUB_ENV
+          export tag_with_timestamp="${{ vars.DOCKERHUB_USERNAME }}/$docker_image_name:$docker_image_tag-$(date +%s)" >> $GITHUB_ENV
           docker tag "$docker_image_nam:$docker_image_tag" "$tag_with_timestamp"
           docker push "$tag_with_timestamp"
