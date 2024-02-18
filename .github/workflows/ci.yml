@@ -14,12 +14,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Build exercise-1
+      - name: Pre build
         working-directory: ./exercise-1
         run: |
           echo "docker_image_name=$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout)" >> "$GITHUB_ENV"
           echo "docker_image_tag=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> "$GITHUB_ENV"
-          
+      - name: Build exercise-1
+        working-directory: ./exercise-1
+        run: |
           echo "docker_image_tag=$docker_image_tag"
           docker build . --file Dockerfile --tag "$docker_image_name:$docker_image_tag" --build-arg="app=$docker_image_name" --build-arg="version=$docker_image_tag"
 
