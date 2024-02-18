@@ -15,5 +15,5 @@ RUN addgroup --gid 1234 my-users && \
     adduser --disabled-password --uid 1000 $user
 USER $user
 WORKDIR /home/$user
-COPY --from=base target/$app-$version-SNAPSHOT.jar app.jar
+COPY --from=base target/$app-$version.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
