@@ -19,6 +19,7 @@ jobs:
         run: |
           echo docker_image_name="$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout)" >> $GITHUB_ENV
           echo docker_image_tag="$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
+          echo "docker_image_name=${{ env.docker_image_name }}"
           docker build . --file Dockerfile --tag "${{ env.docker_image_name }}:${{ env.docker_image_tag }}" --build-arg="app=${{ env.docker_image_name }}" --build-arg="version=${{ env.docker_image_tag }}"
 
       - name: Login to Docker Hub
