@@ -28,4 +28,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Push Docker image
-        run: docker push "$docker_image_name:$docker_image_tag-$(date +%s)"
+        run: |
+          export tag_with_timestamp="$docker_image_name:$docker_image_tag-$(date +%s)"
+          docker tag "$docker_image_name:$docker_image_tag" "$tag_with_timestamp"
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/"$tag_with_timestamp""
